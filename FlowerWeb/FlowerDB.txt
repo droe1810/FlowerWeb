@@ -1,0 +1,120 @@
+Drop database flowerDB
+Create Database flowerDB
+use flowerDB
+
+-- Users table
+CREATE TABLE Users (
+    ID INT PRIMARY KEY IDENTITY(1,1),
+    Name NVARCHAR(255) not null,
+    Email NVARCHAR(255),
+    Password NVARCHAR(255),
+    Role INT
+
+);
+
+-- Insert sample data into Users table
+INSERT INTO Users (Name, Email, Password, Role)
+VALUES 
+    ('Admin' ,'admin@gmail.com', '12345', 1),
+    ('Seller','seller@gmail.com', '12345', 2),
+    ('Buyer3' ,'buyer3@gmail.com', '12345', 3),
+	('Buyer4' ,'buyer4@gmail.com', '12345', 3);
+
+
+-- Categories table
+CREATE TABLE Categories (
+    ID INT PRIMARY KEY IDENTITY(1,1),
+    Name NVARCHAR(255)
+);
+
+-- Insert sample data into Categories table
+INSERT INTO Categories (Name)
+VALUES 
+    ('Wedding Flowers'),
+    ('Birthday Flowers'),
+    ('Grand Opening Flowers'),
+    ('Anniversary Flowers'),
+    ('Valentine Flowers');
+
+
+
+-- Products table
+CREATE TABLE Products (
+    ID INT PRIMARY KEY IDENTITY(1,1),
+    Name NVARCHAR(255),
+    Description NVARCHAR(MAX),
+    Price INT,
+    Image NVARCHAR(MAX),
+    CategoryID INT,
+    FOREIGN KEY (CategoryID) REFERENCES Categories(ID),
+);
+
+-- Insert sample data into Products table
+INSERT INTO Products (Name, Description, Price, Image, CategoryID)
+VALUES 
+
+    ('Wedding Flower 1', 'Description of Wedding Flower 1', 50000, 'img/product/1.jpg', 1),
+	('Valentine Flower 7', 'Description of Valentine Flower 7', 60000, 'img/product/39.jpg', 5),
+    ('Valentine Flower 8', 'Description of Valentine Flower 8', 350000, 'img/product/40.jpg', 5),
+    ('Wedding Flower 2', 'Description of Wedding Flower 2', 60000, 'img/product/2.jpg',  1),
+	('Birthday Flower 1', 'Description of Birthday Flower 1', 50000, 'img/product/9.jpg', 2),
+	('Grand Opening Flower 4', 'Description of Grand Opening Flower 4', 35000, 'img/product/20.jpg', 3),
+	('Grand Opening Flower 5', 'Description of Grand Opening Flower 5', 50000, 'img/product/21.jpg', 3),
+	('Birthday Flower 7', 'Description of Birthday Flower 7', 60000, 'img/product/15.jpg', 2),
+    ('Birthday Flower 8', 'Description of Birthday Flower 8', 350000, 'img/product/16.jpg', 2),
+	('Anniversary Flower 7', 'Description of Anniversary Flower 7', 60000, 'img/product/31.jpg', 4),
+    ('Anniversary Flower 8', 'Description of Anniversary Flower 8', 350000, 'img/product/32.jpg', 4),
+	('Anniversary Flower 5', 'Description of Anniversary Flower 5', 50000, 'img/product/29.jpg', 4),
+    ('Anniversary Flower 6', 'Description of Anniversary Flower 6', 50000, 'img/product/30.jpg', 4),
+    ('Wedding Flower 3', 'Description of Wedding Flower 3', 350000, 'img/product/3.jpg', 1),
+	('Wedding Flower 4', 'Description of Wedding Flower 4', 35000, 'img/product/4.jpg',  1),
+	('Birthday Flower 5', 'Description of Birthday Flower 5', 50000, 'img/product/13.jpg',  2),
+    ('Birthday Flower 6', 'Description of Birthday Flower 6', 50000, 'img/product/14.jpg',  2),
+	('Valentine Flower 5', 'Description of Valentine Flower 5', 50000, 'img/product/37.jpg',  5),
+    ('Valentine Flower 6', 'Description of Valentine Flower 6', 50000, 'img/product/38.jpg',  5),
+	('Grand Opening Flower 1', 'Description of Grand Opening Flower 1', 50000, 'img/product/17.jpg',  3),
+    ('Grand Opening Flower 2', 'Description of Grand Opening Flower 2', 60000, 'img/product/18.jpg',  3),
+	('Wedding Flower 5', 'Description of Wedding Flower 5', 50000, 'img/product/5.jpg',  1),
+    ('Wedding Flower 6', 'Description of Wedding Flower 6', 50000, 'img/product/6.jpg',  1),
+    ('Wedding Flower 7', 'Description of Wedding Flower 7', 60000, 'img/product/7.jpg',  1),
+    ('Wedding Flower 8', 'Description of Wedding Flower 8', 350000, 'img/product/8.jpg',  1),
+	('Grand Opening Flower 6', 'Description of Grand Opening Flower 6', 50000, 'img/product/22.jpg',  3),
+    ('Grand Opening Flower 7', 'Description of Grand Opening Flower 7', 60000, 'img/product/23.jpg',  3),
+    ('Birthday Flower 2', 'Description of Birthday Flower 2', 60000, 'img/product/10.jpg',  2),
+    ('Birthday Flower 3', 'Description of Birthday Flower 3', 350000, 'img/product/11.jpg',  2),
+	('Birthday Flower 4', 'Description of Birthday Flower 4', 35000, 'img/product/12.jpg',  2),
+	('Anniversary Flower 3', 'Description of Anniversary Flower 3', 350000, 'img/product/27.jpg',  4),
+	('Anniversary Flower 4', 'Description of Anniversary Flower 4', 35000, 'img/product/28.jpg',  4),
+    ('Grand Opening Flower 3', 'Description of Grand Opening Flower 3', 350000, 'img/product/19.jpg',  3),
+	('Valentine Flower 1', 'Description of Valentine Flower 1', 50000, 'img/product/33.jpg',  5),
+    ('Valentine Flower 2', 'Description of Valentine Flower 2', 60000, 'img/product/34.jpg',  5),
+    ('Grand Opening Flower 8', 'Description of Grand Opening Flower 8', 350000, 'img/product/24.jpg',  3),
+	('Valentine Flower 3', 'Description of Valentine Flower 3', 350000, 'img/product/35.jpg',  5),
+	('Anniversary Flower 1', 'Description of Anniversary Flower 1', 50000, 'img/product/25.jpg',  4),
+	('Valentine Flower 4', 'Description of Valentine Flower 4', 35000, 'img/product/36.jpg',  5),
+    ('Anniversary Flower 2', 'Description of Anniversary Flower 2', 60000, 'img/product/26.jpg',  4);
+
+
+-- Orders table
+CREATE TABLE Orders (
+    ID INT PRIMARY KEY IDENTITY(1,1),
+    UserID INT,
+	Name NVARCHAR(255) ,
+	phonenumber nvarchar(20),
+    Address NVARCHAR(255),
+    OrderDate DATE,
+    TotalAmount INT DEFAULT 0,
+    FOREIGN KEY (UserID) REFERENCES Users(ID)
+);
+
+
+-- OrderItems table
+CREATE TABLE OrderItems (
+    ID INT PRIMARY KEY IDENTITY(1,1),
+    OrderID INT,
+    ProductID INT,
+    Quantity INT,
+    FOREIGN KEY (OrderID) REFERENCES Orders(ID),
+    FOREIGN KEY (ProductID) REFERENCES Products(ID)
+);
+
