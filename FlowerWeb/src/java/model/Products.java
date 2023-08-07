@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package model;
 
 /**
@@ -9,14 +5,14 @@ package model;
  * @author havie
  */
 public class Products {
+
     private int ID;
     private String name;
     private String description;
     private int price;
     private String image;
     private int categoryID;
-        private int quantity;
-
+    private int quantity;
 
     // Constructors
     public Products() {
@@ -57,8 +53,7 @@ public class Products {
         this.categoryID = categoryID;
         this.quantity = quantity;
     }
-    
-    
+
     public int getQuantity() {
         return quantity;
     }
@@ -107,8 +102,6 @@ public class Products {
     public void setImage(String image) {
         this.image = image;
     }
-
-
 
     public int getCategoryID() {
         return categoryID;

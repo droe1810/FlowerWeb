@@ -1,18 +1,12 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package dao;
 
 import java.util.*;
 import model.*;
 
-/**
- *
- * @author havie
- */
+
 public class CategoriesDAO extends MyDAO {
 
+    // lay ra tat ca category
     public List<Categories> getCategories() {
         List<Categories> categoriesList = new ArrayList<>();
         xSql = "SELECT * FROM Categories";
@@ -35,6 +29,7 @@ public class CategoriesDAO extends MyDAO {
         return categoriesList;
     }
 
+    // thêm moi 1 category
     public void addCategory(String categoryName) {
         xSql = "INSERT INTO Categories (Name) VALUES (?)";
         try {
@@ -46,6 +41,7 @@ public class CategoriesDAO extends MyDAO {
         }
     }
 
+    // cap nhat category
     public void updateCategory(int cateID, String newName) {
         xSql = "UPDATE Categories SET Name = ? WHERE ID = ?";
         try {
@@ -58,6 +54,7 @@ public class CategoriesDAO extends MyDAO {
         }
     }
 
+    // xóa category
     public void deleteCategory(int cateID) {
         try {
             // Set foreign key references to null in other tables

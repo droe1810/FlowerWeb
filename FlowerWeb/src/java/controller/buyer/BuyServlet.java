@@ -4,7 +4,6 @@ import dao.*;
 import model.*;
 import java.util.*;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -25,14 +24,12 @@ public class BuyServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-
-        HttpSession session = request.getSession();
         //gọi ra dữ liệu của phiên người dùng hiện tại
+        HttpSession session = request.getSession();
         Users u = (Users) session.getAttribute("user");
         request.setAttribute("u", u);
 
+        // lay ra san pham ma buyer mua
         int productID = Integer.parseInt(request.getParameter("productID"));
         ProductsDAO pd = new ProductsDAO();
         p = pd.getProductByID(productID);
@@ -45,40 +42,35 @@ public class BuyServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-
-        HttpSession session = request.getSession();
         //gọi ra dữ liệu của phiên người dùng hiện tại
+        HttpSession session = request.getSession();
         Users u = (Users) session.getAttribute("user");
 
+        // lay thong tin nguoi mua
         String name = request.getParameter("name");
         String phone = request.getParameter("phone");
         String address = request.getParameter("address");
         int productID = Integer.parseInt(request.getParameter("productID"));
 
+        // lay ra thanh tien
         int totalAmount = p.getPrice();
 
+        // ngay mua hang
         LocalDate date = LocalDate.now();
 
+        // Tạo đơn hàng
         OrdersDAO od = new OrdersDAO();
         Orders order = new Orders(u.getID(), name, phone, address, date, totalAmount);
         od.createOrder(order);
-        
+
+        // Tạo  mặt hàng trong đơn hàng (OrderItems)
         OrderItemsDAO oid = new OrderItemsDAO();
         oid.insert(productID, 1);
-
-        CategoriesDAO cad = new CategoriesDAO();
-        List<Categories> listC = cad.getCategories();
-        request.setAttribute("listC", listC);
-
-        ProductsDAO pd = new ProductsDAO();
-        List<Products> listP = pd.getAllProducts();
-        request.setAttribute("listP", listP);
-
+        
+        // lay ra danh sach don hang cua buyer
         List<Orders> listO = od.getMyOrders(u.getID());
-
         request.setAttribute("listO", listO);
+        
         request.getRequestDispatcher("my_order.jsp").forward(request, response);
     }
 }

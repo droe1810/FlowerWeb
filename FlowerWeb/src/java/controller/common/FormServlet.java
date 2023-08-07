@@ -1,3 +1,4 @@
+//template cua 1 trang servlet
 package controller.common;
 
 import dao.*;

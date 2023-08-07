@@ -4,12 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import model.*;
 
-/**
- *
- * @author havie
- */
 public class UsersDAO extends MyDAO {
 
+    // hàm dang nhâp
     public Users Login(String email, String pass) {
         xSql = "select * from Users where email = ? and password = ?";
         String xName, xPass, xEmail;
@@ -35,6 +32,7 @@ public class UsersDAO extends MyDAO {
         return x;
     }
 
+    // hàm tra vê danh sách tat ca nguoi dung
     public List<Users> getAllUser() {
         List<Users> list = new ArrayList<>();
         xSql = "select * from users";
@@ -59,7 +57,8 @@ public class UsersDAO extends MyDAO {
         }
         return list;
     }
-
+    
+    // hàm dang kí
     public void SignUp(String name, String email, String pass) {
         xSql = "INSERT INTO Users (Name, Email, Password, Role) VALUES ( ?, ?, ?, ?)";
 

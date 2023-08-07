@@ -21,6 +21,64 @@
         <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
         <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
         <link rel="stylesheet" href="css/style.css" type="text/css">
+
+        <style>
+            .checkout__order {
+                background-color: #f2f2f2;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                padding: 20px;
+                text-align: center;
+            }
+
+            .checkout__order-title {
+                font-size: 20px;
+                margin-bottom: 10px;
+            }
+
+            .checkout__order-products {
+                font-weight: bold;
+                margin-bottom: 10px;
+            }
+
+            .checkout__order-list {
+                list-style-type: none;
+                padding: 0;
+            }
+
+            .checkout__order-item {
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 5px;
+            }
+
+            .checkout__order-item-name {
+                flex: 1;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            .checkout__order-item-price {
+                flex: 0 0 80px;
+                text-align: right;
+            }
+
+            .checkout__order-total {
+                font-weight: bold;
+                margin-top: 10px;
+            }
+
+            .site-btn {
+                background-color: #f44336;
+                color: white;
+                padding: 10px 20px;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                margin-top: 10px;
+            }
+        </style>
     </head>
 
     <body>
@@ -63,36 +121,36 @@
                                             <div class="checkout__input">
                                                 <p> Name<span>*</span></p>
                                                 <input type="text" name="name" value="${u.getName()}" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="checkout__input">
+                                    <p>Address<span>*</span></p>
+                                    <input name="address" type="text" required placeholder="Street Address" class="checkout__input__add">
+                                </div>
+                                <div class="">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="checkout__input">
+                                                <p>Phone<span>*</span></p>
+                                                <input type="number" name="phone" required>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="checkout__input">
-                                        <p>Address<span>*</span></p>
-                                        <input name="address" type="text" required placeholder="Street Address" class="checkout__input__add">
-                                    </div>
-                                    <div class="">
-                                        <div class="row">
-                                            <div class="col-lg-6">
-                                                <div class="checkout__input">
-                                                    <p>Phone<span>*</span></p>
-                                                    <input type="number" name="phone" required>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6">
-                                        <div class="checkout__order" style="background-color: #f2f2f2; border: 1px solid #ccc; border-radius: 5px; padding: 20px; text-align: center;">
-                                            <h4 class="checkout__order-title" style="font-size: 20px; margin-bottom: 10px;">Your Order</h4>
-                                            <div class="checkout__order-products" style="font-weight: bold; margin-bottom: 10px;">Products <span>Total</span></div>
-                                            <ul class="checkout__order-list" style="list-style-type: none; padding: 0;">
-                                                <li class="checkout__order-item" style="display: flex; justify-content: space-between; margin-bottom: 5px;">
-                                                    <input type ="hidden" name="productID" value="${p.getID()}">
-                                                    <input type="text" value="${p.getName()}" readonly class="checkout__order-item-name" style="flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                                                    <input type="text" value=" 1 x ${p.getPrice()}_VND" readonly class="checkout__order-item-price" style="flex: 0 0 80px; text-align: right;">
-                                                </li>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="checkout__order">
+                                        <h4 class="checkout__order-title">Your Order</h4>
+                                        <div class="checkout__order-products">Products <span>Total</span></div>
+                                        <ul class="checkout__order-list">
+                                            <li class="checkout__order-item">
+                                                <input type="hidden" name="productID" value="${p.getID()}">
+                                                <input type="text" value="${p.getName()}" readonly class="checkout__order-item-name">
+                                                <input type="text" value=" 1 x ${p.getPrice()}_VND" readonly class="checkout__order-item-price">
+                                            </li>
                                         </ul>
-                                        <div class="checkout__order-total" style="font-weight: bold; margin-top: 10px;">Total <span>${p.getPrice()}_VND</span></div>
-                                        <button type="submit" class="site-btn" style="background-color: #f44336; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; margin-top: 10px;">PLACE ORDER</button>
+                                        <div class="checkout__order-total">Total <span>${p.getPrice()}_VND</span></div>
+                                        <button type="submit" class="site-btn">PLACE ORDER</button>
                                     </div>
                                 </div>
                             </div>

@@ -12,10 +12,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.*;
 
-/**
- *
- * @author havie
- */
 @WebServlet(name = "HomeServlet", urlPatterns = {"/home"})
 public class HomeServlet extends HttpServlet {
 
@@ -25,15 +21,21 @@ public class HomeServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
 
+        // lay ra list category
         CategoriesDAO cd = new CategoriesDAO();
         List<Categories> listC = cd.getCategories();
         request.setAttribute("listC", listC);
 
+        // lay ra categoryID mà nguoi dùng muon xem
         String stringCateID = request.getParameter("CateID");
+        
+        // danh sach san pham
         ProductsDAO pd = new ProductsDAO();
         List<Products> listP;
+        //neu khong chon category cu the, tra ve danh sach tat ca san pham
         if (stringCateID == null) {
             listP = pd.getAllProducts();
+        // neu chon 1 category, lay ra danh sach san pham thuoc ve category do
         } else {
             int cateID = Integer.parseInt(stringCateID);
             listP = pd.getProductsByCategoryID(cateID);

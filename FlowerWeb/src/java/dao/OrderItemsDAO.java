@@ -1,16 +1,13 @@
 package dao;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import model.*;
 
-/**
- *
- * @author havie
- */
+
 public class OrderItemsDAO extends MyDAO {
 
+    // lay ra thong tin cua don hàng
     public List<OrderItems> getOdDetailByOdId(int odId) {
         List<OrderItems> List = new ArrayList<>();
         xSql = "select oi.*, p.Name, p.Price from OrderItems oi join Products p\n"
@@ -37,8 +34,8 @@ public class OrderItemsDAO extends MyDAO {
         return List;
     }
 
+    // thêm 1 orderItems vào order moi
     public void insert(int ProductID, int Quantity) {
-
         try {
             xSql = "INSERT INTO OrderItems (OrderID, ProductID, Quantity)\n"
                     + "SELECT MAX(id), ?, ?\n"

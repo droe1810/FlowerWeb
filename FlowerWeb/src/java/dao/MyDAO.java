@@ -5,6 +5,8 @@ import DB.DBContext;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+ 
+ // class DAO khai báo chung
 
 public class MyDAO extends DBContext {
   public Connection con = null;

@@ -4,7 +4,6 @@ import dao.*;
 import model.*;
 import java.util.*;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -13,36 +12,30 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.time.LocalDate;
 
-/**
- *
- * @author havie
- */
 @WebServlet(name = "BuyByCartServlet", urlPatterns = {"/buybycart"})
 public class BuyByCartServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
 
-        HttpSession session = request.getSession();
         //gọi ra dữ liệu của phiên người dùng hiện tại
+        HttpSession session = request.getSession();
         Users u = (Users) session.getAttribute("user");
 
+        // thong tin nguoi mua
         String name = request.getParameter("name");
         String phone = request.getParameter("phone");
         String address = request.getParameter("address");
 
+        // lay ra gio hang hien tai
         List<Products> cart = (List<Products>) session.getAttribute("cart");
+        
+        // tinh tong tien cua gio hang/ don hàng
         int total = 0;
-
-        // Update the quantity of the product in the cart
         for (Products cartProduct : cart) {
-
-            // Calculate the total price of items in the cart
             total += cartProduct.getPrice() * cartProduct.getQuantity();
         }
-
+        // ngay mua
         LocalDate date = LocalDate.now();
 
         // Tạo đơn hàng
@@ -56,20 +49,14 @@ public class BuyByCartServlet extends HttpServlet {
             oid.insert(p.getID(), p.getQuantity());
         }
 
+        // cap nhat lai gio hàng sau khi dã mua: xóa các san pham trong gio hang và thành tien cua gio hàng
         session.removeAttribute("cart");
         session.removeAttribute("total");
 
-        CategoriesDAO cad = new CategoriesDAO();
-        List<Categories> listC = cad.getCategories();
-        request.setAttribute("listC", listC);
-
-        ProductsDAO pd = new ProductsDAO();
-        List<Products> listP = pd.getAllProducts();
-        request.setAttribute("listP", listP);
-
+        // lay ra danh sách order
         List<Orders> listO = od.getMyOrders(u.getID());
-
         request.setAttribute("listO", listO);
+        
         request.getRequestDispatcher("my_order.jsp").forward(request, response);
 
     }

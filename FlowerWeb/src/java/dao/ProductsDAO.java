@@ -6,7 +6,8 @@ import java.util.List;
 import model.Products;
 
 public class ProductsDAO extends MyDAO {
-
+    
+    //lay ra danh sách tat ca san pham
     public List<Products> getAllProducts() {
         List<Products> productList = new ArrayList<>();
         xSql = "SELECT * FROM Products";
@@ -32,7 +33,8 @@ public class ProductsDAO extends MyDAO {
 
         return productList;
     }
-
+    
+    // lay ra san pham theo category
     public List<Products> getProductsByCategoryID(int categoryID) {
         List<Products> productList = new ArrayList<>();
         xSql = "SELECT * FROM Products WHERE CategoryID = ?";
@@ -59,6 +61,7 @@ public class ProductsDAO extends MyDAO {
         return productList;
     }
 
+    // lay san pham bang id
     public Products getProductByID(int productID) {
         xSql = "SELECT * FROM Products WHERE ID = ?";
         try {
@@ -85,6 +88,7 @@ public class ProductsDAO extends MyDAO {
         return null;
     }
 
+    // hàm search san pham
     public List<Products> searchProductByName(String text) {
         List<Products> productList = new ArrayList<>();
         xSql = "SELECT * FROM Products WHERE Name LIKE ?";
@@ -112,6 +116,7 @@ public class ProductsDAO extends MyDAO {
         return productList;
     }
 
+    // hàm thêm moi 1 san pham
     public void addProduct(Products product) {
         xSql = "INSERT INTO Products (Name, Description, Price, Image, CategoryID) VALUES (?, ?, ?, ?, ?)";
         try {
@@ -127,6 +132,7 @@ public class ProductsDAO extends MyDAO {
         }
     }
 
+    // hàm sua san pham
     public void editProduct(int productID, Products updatedProduct) {
         xSql = "UPDATE Products SET Name = ?, Description = ?, Price = ?, Image = ?, CategoryID = ? WHERE ID = ?";
         try {
@@ -143,6 +149,7 @@ public class ProductsDAO extends MyDAO {
         }
     }
 
+    // hàm xóa san pham
     public void deleteProduct(int productID) {
         try {
             // Cập nhật các mặt hàng liên quan trong bảng OrderItems, đặt ProductID thành null
