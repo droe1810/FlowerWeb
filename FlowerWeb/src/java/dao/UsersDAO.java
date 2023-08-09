@@ -67,7 +67,7 @@ public class UsersDAO extends MyDAO {
             ps.setString(1, name);
             ps.setString(2, email);
             ps.setString(3, pass);
-            ps.setInt(4, 1);
+            ps.setInt(4, 3);
             ps.executeUpdate();
             ps.close();
         } catch (Exception e) {
