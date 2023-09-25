@@ -97,7 +97,7 @@
 
             <div class="button-container">
                 <input type="submit" value="OK">
-                <a href="home" class="btn btn-primary">Back to Home</a>
+                <a href="home" class="btn btn-primary">Back to Home hehe</a>
             </div>
         </form>
 
