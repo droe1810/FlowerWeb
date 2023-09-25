@@ -22,7 +22,7 @@
                 <div class="modal-content">
                     <form action="addproduct" method="post">
                         <div class="modal-header">						
-                            <h4 class="modal-title">Add Product 2haibara</h4>
+                            <h4 class="modal-title">Add Product 22haibara</h4>
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                         </div>
 

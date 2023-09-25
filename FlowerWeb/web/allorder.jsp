@@ -93,7 +93,7 @@
         <table>
             <thead>
                 <tr>
-                    <th>Nameee</th>
+                    <th>Namee2e</th>
                     <th>Phone</th>
                     <th>Address</th>
                     <th>Order Date</th>
